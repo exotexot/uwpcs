@@ -19,9 +19,9 @@ App::App() noexcept
     MainComponentName(L"uwpcs");
 
 #if BUNDLE
-    JavaScriptBundleFile(L"index");
-    InstanceSettings().UseWebDebugger(true);
-    InstanceSettings().UseFastRefresh(true);
+    JavaScriptBundleFile(L"index.windows");
+    InstanceSettings().UseWebDebugger(false);
+    InstanceSettings().UseFastRefresh(false);
 #else
     JavaScriptMainModuleName(L"index");
     InstanceSettings().UseWebDebugger(false);
@@ -31,7 +31,7 @@ App::App() noexcept
 #if _DEBUG
     InstanceSettings().EnableDeveloperMenu(true);
 #else
-    InstanceSettings().EnableDeveloperMenu(true);
+    InstanceSettings().EnableDeveloperMenu(false);
 #endif
 
     RegisterAutolinkedNativeModulePackages(PackageProviders()); // Includes any autolinked modules
