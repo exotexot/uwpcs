@@ -20,13 +20,17 @@ import {getDeviceNameSync} from 'react-native-device-info';
 
 const App: () => React$Node = () => {
   return (
-    <>
-      <View>
-        <Text> Hallo </Text>
-        <Text> {getDeviceNameSync()} </Text>
-      </View>
-    </>
+    <View style={styles.container}>
+      <Text> Hallo </Text>
+      <Text> {getDeviceNameSync()} </Text>
+    </View>
   );
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 100,
+  },
+});

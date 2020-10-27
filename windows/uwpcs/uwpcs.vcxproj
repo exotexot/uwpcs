@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\Microsoft.Net.Native.Compiler.props" Condition="Exists('..\packages\Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\Microsoft.Net.Native.Compiler.props')" />
+  <Import Project="..\packages\runtime.win10-x86.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-x86.Microsoft.Net.Native.Compiler.props" Condition="Exists('..\packages\runtime.win10-x86.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-x86.Microsoft.Net.Native.Compiler.props')" />
+  <Import Project="..\packages\runtime.win10-x86.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-x86.Microsoft.Net.Native.SharedLibrary.props" Condition="Exists('..\packages\runtime.win10-x86.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-x86.Microsoft.Net.Native.SharedLibrary.props')" />
+  <Import Project="..\packages\runtime.win10-x64.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-x64.Microsoft.Net.Native.Compiler.props" Condition="Exists('..\packages\runtime.win10-x64.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-x64.Microsoft.Net.Native.Compiler.props')" />
+  <Import Project="..\packages\runtime.win10-x64.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-x64.Microsoft.Net.Native.SharedLibrary.props" Condition="Exists('..\packages\runtime.win10-x64.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-x64.Microsoft.Net.Native.SharedLibrary.props')" />
+  <Import Project="..\packages\runtime.win10-arm64.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-arm64.Microsoft.Net.Native.Compiler.props" Condition="Exists('..\packages\runtime.win10-arm64.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-arm64.Microsoft.Net.Native.Compiler.props')" />
+  <Import Project="..\packages\runtime.win10-arm64.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-arm64.Microsoft.Net.Native.SharedLibrary.props" Condition="Exists('..\packages\runtime.win10-arm64.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-arm64.Microsoft.Net.Native.SharedLibrary.props')" />
+  <Import Project="..\packages\runtime.win10-arm.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-arm.Microsoft.Net.Native.Compiler.props" Condition="Exists('..\packages\runtime.win10-arm.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-arm.Microsoft.Net.Native.Compiler.props')" />
+  <Import Project="..\packages\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.props" Condition="Exists('..\packages\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.props')" />
   <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.200316.3\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.200316.3\build\native\Microsoft.Windows.CppWinRT.props')" />
   <PropertyGroup Label="Globals">
     <CppWinRTOptimized>true</CppWinRTOptimized>
@@ -14,10 +23,11 @@
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
     <WindowsTargetPlatformVersion Condition=" '$(WindowsTargetPlatformVersion)' == '' ">10.0.18362.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.16299.0</WindowsTargetPlatformMinVersion>
-    <PackageCertificateKeyFile>uwpcs_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>5E6926F6C1D38D01C86F458325D2CA8E52CDAEF0</PackageCertificateThumbprint>
+    <WindowsTargetPlatformMinVersion>10.0.17763.0</WindowsTargetPlatformMinVersion>
+    <PackageCertificateThumbprint>A93991969A30ADEA670AAF0C3BBCB23EFF9EF64F</PackageCertificateThumbprint>
     <PackageCertificatePassword>password</PackageCertificatePassword>
+    <UseDotNetNativeToolchain Condition="'$(Configuration)'=='Release'">true</UseDotNetNativeToolchain>
+    <DotNetNativeVersion>2.2.8-rel-28605-00</DotNetNativeVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <ItemGroup Label="ProjectConfigurations">
@@ -143,6 +153,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="PropertySheet.props" />
+    <None Include="uwpcs_TemporaryKey.pfx" />
     <Text Include="readme.txt">
       <DeploymentContent>false</DeploymentContent>
     </Text>
@@ -155,6 +166,13 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <PropertyGroup Label="ReactNativeWindowsNodeProps">
     <ReactNativeWindowsDir Condition="'$(ReactNativeWindowsDir)' == ''">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), 'node_modules\react-native-windows\package.json'))\node_modules\react-native-windows\</ReactNativeWindowsDir>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
   </PropertyGroup>
   <ImportGroup Label="ReactNativeWindowsNodeTargets">
     <Import Project="$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Uwp.CppApp.props" Condition="Exists('$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Uwp.CppApp.props')" />
@@ -170,6 +188,15 @@
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.200316.3\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.200316.3\build\native\Microsoft.Windows.CppWinRT.targets')" />
     <Import Project="..\packages\Microsoft.UI.Xaml.2.3.191129002\build\native\Microsoft.UI.Xaml.targets" Condition="Exists('..\packages\Microsoft.UI.Xaml.2.3.191129002\build\native\Microsoft.UI.Xaml.targets')" />
+    <Import Project="..\packages\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.targets" Condition="Exists('..\packages\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.targets')" />
+    <Import Project="..\packages\runtime.win10-arm.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-arm.Microsoft.Net.Native.Compiler.targets" Condition="Exists('..\packages\runtime.win10-arm.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-arm.Microsoft.Net.Native.Compiler.targets')" />
+    <Import Project="..\packages\runtime.win10-arm64.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-arm64.Microsoft.Net.Native.SharedLibrary.targets" Condition="Exists('..\packages\runtime.win10-arm64.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-arm64.Microsoft.Net.Native.SharedLibrary.targets')" />
+    <Import Project="..\packages\runtime.win10-arm64.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-arm64.Microsoft.Net.Native.Compiler.targets" Condition="Exists('..\packages\runtime.win10-arm64.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-arm64.Microsoft.Net.Native.Compiler.targets')" />
+    <Import Project="..\packages\runtime.win10-x64.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-x64.Microsoft.Net.Native.SharedLibrary.targets" Condition="Exists('..\packages\runtime.win10-x64.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-x64.Microsoft.Net.Native.SharedLibrary.targets')" />
+    <Import Project="..\packages\runtime.win10-x64.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-x64.Microsoft.Net.Native.Compiler.targets" Condition="Exists('..\packages\runtime.win10-x64.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-x64.Microsoft.Net.Native.Compiler.targets')" />
+    <Import Project="..\packages\runtime.win10-x86.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-x86.Microsoft.Net.Native.SharedLibrary.targets" Condition="Exists('..\packages\runtime.win10-x86.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-x86.Microsoft.Net.Native.SharedLibrary.targets')" />
+    <Import Project="..\packages\runtime.win10-x86.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-x86.Microsoft.Net.Native.Compiler.targets" Condition="Exists('..\packages\runtime.win10-x86.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-x86.Microsoft.Net.Native.Compiler.targets')" />
+    <Import Project="..\packages\Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\Microsoft.Net.Native.Compiler.targets" Condition="Exists('..\packages\Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\Microsoft.Net.Native.Compiler.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -178,5 +205,23 @@
     <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.200316.3\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.200316.3\build\native\Microsoft.Windows.CppWinRT.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.200316.3\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.200316.3\build\native\Microsoft.Windows.CppWinRT.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.UI.Xaml.2.3.191129002\build\native\Microsoft.UI.Xaml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.UI.Xaml.2.3.191129002\build\native\Microsoft.UI.Xaml.targets'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.props'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.targets'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-arm.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-arm.Microsoft.Net.Native.Compiler.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-arm.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-arm.Microsoft.Net.Native.Compiler.props'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-arm.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-arm.Microsoft.Net.Native.Compiler.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-arm.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-arm.Microsoft.Net.Native.Compiler.targets'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-arm64.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-arm64.Microsoft.Net.Native.SharedLibrary.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-arm64.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-arm64.Microsoft.Net.Native.SharedLibrary.props'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-arm64.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-arm64.Microsoft.Net.Native.SharedLibrary.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-arm64.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-arm64.Microsoft.Net.Native.SharedLibrary.targets'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-arm64.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-arm64.Microsoft.Net.Native.Compiler.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-arm64.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-arm64.Microsoft.Net.Native.Compiler.props'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-arm64.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-arm64.Microsoft.Net.Native.Compiler.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-arm64.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-arm64.Microsoft.Net.Native.Compiler.targets'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-x64.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-x64.Microsoft.Net.Native.SharedLibrary.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-x64.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-x64.Microsoft.Net.Native.SharedLibrary.props'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-x64.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-x64.Microsoft.Net.Native.SharedLibrary.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-x64.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-x64.Microsoft.Net.Native.SharedLibrary.targets'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-x64.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-x64.Microsoft.Net.Native.Compiler.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-x64.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-x64.Microsoft.Net.Native.Compiler.props'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-x64.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-x64.Microsoft.Net.Native.Compiler.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-x64.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-x64.Microsoft.Net.Native.Compiler.targets'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-x86.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-x86.Microsoft.Net.Native.SharedLibrary.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-x86.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-x86.Microsoft.Net.Native.SharedLibrary.props'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-x86.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-x86.Microsoft.Net.Native.SharedLibrary.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-x86.Microsoft.Net.Native.SharedLibrary.2.2.7-rel-28605-00\build\runtime.win10-x86.Microsoft.Net.Native.SharedLibrary.targets'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-x86.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-x86.Microsoft.Net.Native.Compiler.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-x86.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-x86.Microsoft.Net.Native.Compiler.props'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-x86.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-x86.Microsoft.Net.Native.Compiler.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-x86.Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\runtime.win10-x86.Microsoft.Net.Native.Compiler.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\Microsoft.Net.Native.Compiler.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\Microsoft.Net.Native.Compiler.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\Microsoft.Net.Native.Compiler.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Native.Compiler.2.2.8-rel-28605-00\build\Microsoft.Net.Native.Compiler.targets'))" />
   </Target>
 </Project>
